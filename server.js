@@ -14,6 +14,15 @@ app.use((err, req, res, next)=> {
   res.status(err.status || 500).send({ err });
 });
 
+app.post('/api/movies', async(req, res, next)=> {
+  try {
+    res.status(201).send(await Movie.create(req.body));
+  }
+  catch(ex){
+    next(ex);
+  }
+});
+
 
 const port = process.env.PORT || 3000;
 
