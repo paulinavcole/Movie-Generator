@@ -7,7 +7,7 @@ const Movie = conn.define('movie', {
   },
   ranking: {
     type: INTEGER,
-    defaultValue: 1
+    defaultValue: 3
   },
 });
 

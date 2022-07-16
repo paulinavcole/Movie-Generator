@@ -23,6 +23,39 @@ app.post('/api/movies', async(req, res, next)=> {
   }
 });
 
+app.get('/api/movies', async(req, res, next)=> {
+  try {
+    res.send(await Movie.findAll({
+      order: [['name']]
+    }));
+  }
+  catch(ex){
+    next(ex);
+  }
+});
+
+app.put('/api/movies/:id', async(req, res, next)=> {
+  try {
+    const movie = await Movie.findByPk(req.params.id);
+    await movie.update(req.body);
+    res.send(movie);
+  }
+  catch(ex){
+    next(ex);
+  }
+});
+
+app.delete('/api/movies/:id', async(req, res, next)=> {
+  try {
+    const movie = await Movie.findByPk(req.params.id);
+    await movie.destroy();
+    res.sendStatus(204);
+  }
+  catch(ex){
+    next(ex);
+  }
+});
+
 
 const port = process.env.PORT || 3000;
 
