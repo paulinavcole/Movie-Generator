@@ -2,4 +2,4 @@
 [X]Create A Movie
 [ ]Delete A Movie
 [ ]Increment / Decrement Star Rating
-[ ]Show average rating
+[X]Show average rating
