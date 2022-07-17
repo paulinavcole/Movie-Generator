@@ -16,7 +16,7 @@ class App extends Component {
           <h1>
             <Link to='/'>Movies ({this.props.movies.length})</Link>
           </h1>
-          <button onClick={ this.props.createMovie }>Create A New Movie</button>
+          <button onClick={ this.props.createMovie }>Generate A New Movie</button>
           <Switch>
             <Route exact path='/' component={Movies} />
           </Switch>

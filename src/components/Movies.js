@@ -11,6 +11,7 @@ const Movies = ({ movies }) => {
             <h2>
               <Link to={`/movies/${movie.id}`}>Movie: {movie.name}</Link>
             </h2>
+            Rank: {movie.ranking}
           </li>
         );
       })}
