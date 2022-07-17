@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { deleteMovie } from '../store/movies';
+import { deleteMovie, updateMovie } from '../store/movies';
 
-const Movies = ({ movies, deleteMovie }) => {
+const Movies = ({ movies, deleteMovie, updateMovie }) => {
 let sumRanks = 0;
  return (
     <ul>
@@ -12,8 +12,8 @@ let sumRanks = 0;
           <li key={movie.id}>
             Movie: {movie.name} Rank: {movie.ranking}
             <button onClick={ () => deleteMovie(movie)}>X</button>
-            <button>+</button>
-            <button>-</button>
+            <button onClick={ ()=> updateMovie(movie, +1)}>+</button>
+            <button onClick={ ()=> updateMovie(movie, -1)}>-</button>
           </li>
         );
       })}
@@ -30,9 +30,13 @@ const mapDispatchToProps = (dispatch) => {
   return {
     deleteMovie: (movie) => {
       dispatch(deleteMovie(movie))
+    },
+    updateMovie: (movie, rank) => {
+      movie = {...movie, ranking: movie.ranking + rank};
+      dispatch(updateMovie(movie));
     }
-  }
-}
+  };
+};
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(Movies);

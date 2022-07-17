@@ -4,6 +4,7 @@ import axios from 'axios';
 const CREATE_MOVIE = 'CREATE_MOVIE';
 const DELETE_MOVIE = 'DELETE_MOVIE';
 const SET_MOVIES = 'SET_MOVIES';
+const UPDATE_MOVIE = 'UPDATE_MOVIE'
 
 // action creators
 const _createMovie = (movie) => {
@@ -27,6 +28,13 @@ const _setMovies = (movies) => {
   };
 };
 
+const _updateMovie = (movie) => {
+  return {
+    type: UPDATE_MOVIE,
+    movie
+  };
+};
+
 // THUNK CREATORS
 
 export const createMovie = () => {
@@ -47,8 +55,15 @@ export const deleteMovie = (movie) => {
   return async (dispatch) => {
     await axios.delete(`/api/movies/${movie.id}`);
     dispatch(_deleteMovie(movie))
-  }
-}
+  };
+};
+
+export const updateMovie = (movie) => {
+  return async (dispatch) => {
+    movie = (await axios.put(`/api/movies/${movie.id}`, movie)).data;
+    dispatch(_updateMovie(movie));
+  };
+};
 
 export default (state = [], action) => {
   switch (action.type) {
@@ -58,6 +73,8 @@ export default (state = [], action) => {
       return state.filter((movie) => movie.id !== action.movie.id);
     case CREATE_MOVIE:
       return [...state, action.movie];
+    case UPDATE_MOVIE:
+      return state.map(movie => movie.id !== action.movie.id ? movie : action.movie);
     default:
       return state;
   }
