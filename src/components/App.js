@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { HashRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import Movies from './Movies';
 import { connect } from 'react-redux';
-import { fetchMovies, createMovie,  } from '../store/movies';
+import { fetchMovies, createMovie } from '../store/movies';
 
 class App extends Component {
   componentDidMount() {

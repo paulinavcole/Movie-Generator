@@ -36,12 +36,19 @@ export const createMovie = () => {
   };
 };
 
-export const fetchMovies= () => {
+export const fetchMovies = () => {
   return async (dispatch) => {
     const { data: movies } = await axios.get('/api/movies');
     dispatch(_setMovies(movies));
   };
 };
+
+export const deleteMovie = (movie) => {
+  return async (dispatch) => {
+    await axios.delete(`/api/movies/${movie.id}`);
+    dispatch(_deleteMovie(movie))
+  }
+}
 
 export default (state = [], action) => {
   switch (action.type) {
