@@ -9,7 +9,7 @@ const Movies = ({ movies }) => {
         return (
           <li key={movie.id}>
             <h2>
-              <Link to={`/movies/${movie.id}`}>Movie: {movie.name}</Link>
+              Movie: {movie.name}
             </h2>
             Rank: {movie.ranking}
           </li>

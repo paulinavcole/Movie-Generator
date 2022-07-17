@@ -3,6 +3,7 @@ const { Movie } = require('./db/Movie');
 const express = require('express');
 const app = express();
 const path = require('path');
+const { createRandomMovie } = require('./db/seed-data')
 
 app.use(express.json());
 app.use('/dist', express.static(path.join(__dirname, 'dist')));
@@ -16,7 +17,7 @@ app.use((err, req, res, next)=> {
 
 app.post('/api/movies', async(req, res, next)=> {
   try {
-    res.status(201).send(await Movie.create(req.body));
+    res.status(201).send(await Movie.create(createRandomMovie()));
   }
   catch(ex){
     next(ex);
@@ -26,7 +27,7 @@ app.post('/api/movies', async(req, res, next)=> {
 app.get('/api/movies', async(req, res, next)=> {
   try {
     res.send(await Movie.findAll({
-      order: [['name']]
+      order: [['ranking']]
     }));
   }
   catch(ex){

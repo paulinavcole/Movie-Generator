@@ -29,10 +29,10 @@ const _setMovies = (movies) => {
 
 // THUNK CREATORS
 
-export const createMovie = (movie) => {
+export const createMovie = () => {
   return async (dispatch) => {
-    const { data: created } = await axios.post('/api/movies', movie);
-    dispatch(_createMovie(created));
+    const movie = (await axios.post('/api/movies')).data;
+    dispatch(_createMovie(movie));
   };
 };
 
