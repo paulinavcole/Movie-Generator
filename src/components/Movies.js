@@ -17,7 +17,7 @@ let sumRanks = 0;
           </li>
         );
       })}
-      <h2>The average movie ranking is {sumRanks===0 ? '0' : sumRanks/ movies.length }!</h2>
+      <h2>The average movie ranking is {sumRanks===0 ? '0' : Math.floor(sumRanks/ movies.length) }!</h2>
     </ul>
   );
 };
