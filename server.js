@@ -27,7 +27,11 @@ app.post('/api/movies', async(req, res, next)=> {
 app.get('/api/movies', async(req, res, next)=> {
   try {
     res.send(await Movie.findAll({
-      order: [['ranking']]
+      order: [
+        ['ranking', 'DESC'],
+        ['name', 'ASC']
+      ]
+
     }));
   }
   catch(ex){
